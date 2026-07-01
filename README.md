@@ -56,7 +56,7 @@ This project is intended for:
 
 ## Executive Dashboard
 
-![Executive Dashboard](images/executive_dashboard.png)
+![Executive Dashboard](https://github.com/Amollo1/HR-Analytics-Python-Tableau/blob/master/Images/HR_Dashboard_Image.png)
 
 ---
 

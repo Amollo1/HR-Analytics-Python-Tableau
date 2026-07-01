@@ -1,0 +1,400 @@
+"""
+==========================================================
+GENERATE A REALISTIC HR DATASET FOR DASHBOARDS
+==========================================================
+
+Author: Benard Omoga
+
+Purpose:
+    Generate a realistic synthetic HR dataset suitable for:
+        - Power BI
+        - Tableau
+        - Excel Dashboards
+        - SQL Projects
+        - Portfolio Projects
+
+Output:
+    HR_Dataset.csv
+    HR_Dataset.xlsx
+
+Required Libraries:
+    pip install pandas numpy faker openpyxl
+==========================================================
+"""
+
+import random
+import numpy as np
+import pandas as pd
+from faker import Faker
+from datetime import datetime, timedelta
+
+# ----------------------------------------------------------
+# INITIALIZATION
+# ----------------------------------------------------------
+
+fake = Faker()
+
+random.seed(42)
+np.random.seed(42)
+Faker.seed(42)
+
+NUM_EMPLOYEES = 5000
+
+today = datetime.today()
+
+# ----------------------------------------------------------
+# MASTER DATA
+# ----------------------------------------------------------
+
+departments = {
+    "Human Resources": (50000, 120000),
+    "Finance": (70000, 180000),
+    "IT": (90000, 280000),
+    "Sales": (50000, 250000),
+    "Marketing": (60000, 180000),
+    "Operations": (70000, 220000),
+    "Procurement": (60000, 180000),
+    "Customer Service": (40000, 100000),
+    "Legal": (120000, 300000),
+    "Administration": (50000, 130000)
+}
+
+job_titles = {
+    "Human Resources": [
+        "HR Officer",
+        "HR Manager",
+        "Talent Acquisition Specialist"
+    ],
+    "Finance": [
+        "Accountant",
+        "Finance Analyst",
+        "Finance Manager"
+    ],
+    "IT": [
+        "Data Analyst",
+        "Software Developer",
+        "Database Administrator",
+        "System Administrator",
+        "Cybersecurity Analyst",
+        "BI Developer"
+    ],
+    "Sales": [
+        "Sales Executive",
+        "Sales Manager",
+        "Business Development Officer"
+    ],
+    "Marketing": [
+        "Marketing Officer",
+        "Digital Marketer",
+        "Brand Manager"
+    ],
+    "Operations": [
+        "Operations Officer",
+        "Operations Manager",
+        "Logistics Coordinator"
+    ],
+    "Procurement": [
+        "Procurement Officer",
+        "Supply Chain Analyst"
+    ],
+    "Customer Service": [
+        "Customer Care Representative",
+        "Call Center Agent"
+    ],
+    "Legal": [
+        "Legal Counsel",
+        "Compliance Officer"
+    ],
+    "Administration": [
+        "Administrative Officer",
+        "Office Manager"
+    ]
+}
+
+locations = [
+    "Nairobi",
+    "Mombasa",
+    "Kisumu",
+    "Nakuru",
+    "Eldoret",
+    "Kampala",
+    "Dar es Salaam",
+    "Kigali"
+]
+
+education = [
+    "Diploma",
+    "Bachelor",
+    "Master",
+    "PhD"
+]
+
+marital = [
+    "Single",
+    "Married",
+    "Divorced",
+    "Widowed"
+]
+
+employment_type = [
+    "Permanent",
+    "Contract",
+    "Intern",
+    "Part-Time"
+]
+
+recruitment_source = [
+    "LinkedIn",
+    "Referral",
+    "Company Website",
+    "Indeed",
+    "Recruitment Agency",
+    "Facebook",
+    "Career Fair"
+]
+
+exit_reasons = [
+    "Better Opportunity",
+    "Retirement",
+    "Relocation",
+    "Termination",
+    "Personal Reasons"
+]
+
+genders = [
+    "Male",
+    "Female"
+]
+
+# ----------------------------------------------------------
+# CREATE MANAGERS
+# ----------------------------------------------------------
+
+manager_names = []
+
+for i in range(100):
+    manager_names.append(fake.name())
+
+# ----------------------------------------------------------
+# CREATE DATASET
+# ----------------------------------------------------------
+
+records = []
+
+for emp in range(1, NUM_EMPLOYEES + 1):
+
+    dept = random.choice(list(departments.keys()))
+
+    title = random.choice(job_titles[dept])
+
+    salary_min = departments[dept][0]
+    salary_max = departments[dept][1]
+
+    salary = random.randint(salary_min, salary_max)
+
+    age = random.randint(21, 60)
+
+    years_service = random.randint(
+        0,
+        min(age - 20, 20)
+    )
+
+    hire_date = today - timedelta(
+        days=years_service * 365 + random.randint(0, 365)
+    )
+
+    dob = today - timedelta(days=age * 365)
+
+    performance = np.random.choice(
+        [1, 2, 3, 4, 5],
+        p=[0.05, 0.10, 0.35, 0.35, 0.15]
+    )
+
+    attendance = round(
+        np.random.normal(96, 2),
+        2
+    )
+
+    attendance = max(75, min(attendance, 100))
+
+    promotion = "Yes" if performance >= 4 else "No"
+
+    training = random.randint(5, 80)
+
+    leave_taken = random.randint(0, 30)
+
+    sick_leave = random.randint(0, 10)
+
+    overtime = random.randint(0, 100)
+
+    bonus = round(salary * random.uniform(0.05, 0.20), 2)
+
+    attrition_probability = 0.08
+
+    if salary < 70000:
+        attrition_probability += 0.08
+
+    if performance <= 2:
+        attrition_probability += 0.05
+
+    if years_service < 2:
+        attrition_probability += 0.07
+
+    attrition = np.random.choice(
+        ["Yes", "No"],
+        p=[
+            min(attrition_probability, 0.40),
+            1 - min(attrition_probability, 0.40)
+        ]
+    )
+
+    exit_date = ""
+
+    exit_reason = ""
+
+    if attrition == "Yes":
+
+        exit_date = hire_date + timedelta(
+            days=random.randint(300, 2500)
+        )
+
+        if exit_date > today:
+            exit_date = today - timedelta(days=random.randint(1, 120))
+
+        exit_reason = random.choice(exit_reasons)
+
+    employee_status = "Inactive" if attrition == "Yes" else "Active"
+
+    record = {
+
+        "Employee_ID": emp,
+
+        "First_Name": fake.first_name(),
+
+        "Last_Name": fake.last_name(),
+
+        "Gender": random.choice(genders),
+
+        "Age": age,
+
+        "Date_of_Birth": dob.date(),
+
+        "Marital_Status": random.choice(marital),
+
+        "Department": dept,
+
+        "Job_Title": title,
+
+        "Location": random.choice(locations),
+
+        "Manager": random.choice(manager_names),
+
+        "Employment_Type": random.choice(employment_type),
+
+        "Education_Level": random.choice(education),
+
+        "Hire_Date": hire_date.date(),
+
+        "Years_of_Service": years_service,
+
+        "Salary": salary,
+
+        "Bonus": bonus,
+
+        "Total_Compensation": salary + bonus,
+
+        "Performance_Rating": performance,
+
+        "Promotion_Eligible": promotion,
+
+        "Training_Hours": training,
+
+        "Annual_Leave_Taken": leave_taken,
+
+        "Sick_Leave": sick_leave,
+
+        "Leave_Balance": 30 - leave_taken,
+
+        "Attendance_Rate": attendance,
+
+        "Late_Arrivals": random.randint(0, 20),
+
+        "Overtime_Hours": overtime,
+
+        "Recruitment_Source": random.choice(
+            recruitment_source
+        ),
+
+        "Time_to_Hire_Days": random.randint(7, 90),
+
+        "Recruitment_Cost": random.randint(
+            10000,
+            150000
+        ),
+
+        "Employee_Status": employee_status,
+
+        "Attrition": attrition,
+
+        "Exit_Date": exit_date,
+
+        "Exit_Reason": exit_reason
+
+    }
+
+    records.append(record)
+
+# ----------------------------------------------------------
+# CREATE DATAFRAME
+# ----------------------------------------------------------
+
+df = pd.DataFrame(records)
+
+# ----------------------------------------------------------
+# ADD MISSING VALUES (2%)
+# ----------------------------------------------------------
+
+for col in [
+    "Training_Hours",
+    "Bonus",
+    "Attendance_Rate",
+    "Recruitment_Cost"
+]:
+
+    idx = df.sample(frac=0.02).index
+
+    df.loc[idx, col] = np.nan
+
+# ----------------------------------------------------------
+# SAVE FILES
+# ----------------------------------------------------------
+
+df.to_csv(
+    "HR_Dataset.csv",
+    index=False
+)
+
+df.to_excel(
+    "HR_Dataset.xlsx",
+    index=False
+)
+
+# ----------------------------------------------------------
+# SUMMARY
+# ----------------------------------------------------------
+
+print("=" * 50)
+print("HR DATASET CREATED SUCCESSFULLY")
+print("=" * 50)
+
+print(f"Rows      : {len(df)}")
+print(f"Columns   : {len(df.columns)}")
+print()
+
+print(df.head())
+
+print()
+
+print("Files saved:")
+print("✓ HR_Dataset.csv")
+print("✓ HR_Dataset.xlsx")

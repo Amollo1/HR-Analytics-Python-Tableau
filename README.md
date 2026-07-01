@@ -52,23 +52,23 @@ This project is intended for:
 
 # Dashboard Screenshots
 
-> **Replace the image paths below with your own screenshots after uploading them to GitHub.**
 
 ## Executive Dashboard
 
 ![Executive Dashboard](https://github.com/Amollo1/HR-Analytics-Python-Tableau/blob/master/Images/HR_Dashboard_Image.png)
 
+
 ---
 
 # Data Model
 
-The dashboard is built using a simple flat model table consisting of one primary table.
-### Fact Table
-
-- HR Employee Records
+The dashboard is built using a simple flat model table consisting of one primary fact table supported by multiple dimensions.
 
 
 ```
+              
+```
+
 ---
 
 # Project Structure
@@ -189,8 +189,7 @@ Use the interactive filters to analyze:
 
 IT Specialist | Data Analyst | Web Developer | AI Content Creator
 
-- Portfolio: [https://github.com/yourusername](https://amollo1.github.io/)
-- LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/benard-omoga-870b77145/)
-- GitHub: [https://github.com/yourusername](https://github.com/Amollo1)
+- GitHub: https://github.com/yourusername
+- LinkedIn: https://linkedin.com/in/yourprofile
 
 ---

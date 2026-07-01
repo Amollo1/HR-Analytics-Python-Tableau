@@ -62,36 +62,13 @@ This project is intended for:
 
 # Data Model
 
-The dashboard is built using a simple star-schema model consisting of one primary fact table supported by multiple dimensions.
-
+The dashboard is built using a simple flat model table consisting of one primary table.
 ### Fact Table
 
 - HR Employee Records
 
-### Dimension Tables
-
-- Employee
-- Department
-- Location
-- Date
-- Manager
-- Recruitment Source
-
-### Relationships
 
 ```
-              Department
-                   │
-                   │
-Location ── Employee Fact ── Date
-                   │
-                   │
-             Recruitment
-                   │
-                   │
-               Manager
-```
-
 ---
 
 # Project Structure
@@ -212,7 +189,8 @@ Use the interactive filters to analyze:
 
 IT Specialist | Data Analyst | Web Developer | AI Content Creator
 
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
+- Portfolio: [https://github.com/yourusername](https://amollo1.github.io/)
+- LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/benard-omoga-870b77145/)
+- GitHub: [https://github.com/yourusername](https://github.com/Amollo1)
 
 ---

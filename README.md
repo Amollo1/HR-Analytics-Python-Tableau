@@ -189,7 +189,8 @@ Use the interactive filters to analyze:
 
 IT Specialist | Data Analyst | Web Developer | AI Content Creator
 
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
+- GitHub: [https://github.com/omogaben](https://github.com/Amollo1)
+- LinkedIn:[ https://linkedin.com/in/omogaben](https://www.linkedin.com/in/benard-omoga-870b77145/)
+- Portfolio: [https://github.com/omogaben](https://amollo1.github.io/)
 
 ---

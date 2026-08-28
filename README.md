@@ -62,7 +62,7 @@ This project is intended for:
 
 # Data Model
 
-The dashboard is built using a simple flat model table consisting of one primary fact table supported by multiple dimensions.
+The dashboard is built using a simple flat model table consisting of one primary fact table.
 
 
 ```
